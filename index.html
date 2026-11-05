@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a website</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Pixel Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Pixel styling */
+        body {
+            font-family: 'Silkscreen', 'Press Start 2P', monospace;
+            background-color: #000000;
+            color: #ffffff;
+            image-rendering: pixelated;
+        }
+
+        /* Pixel-art Custom Borders & Shadows */
+        .pixel-card {
+            background-color: #050505;
+            border: 3px solid #ffffff;
+            box-shadow: 6px 6px 0px #ffffff;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .pixel-card:hover {
+            border-color: #ffffff;
+            box-shadow: 8px 8px 0px #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .pixel-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #ffffff;
+            box-shadow: 4px 4px 0px #000000;
+            text-transform: uppercase;
+        }
+
+        .pixel-btn:hover {
+            background-color: #cccccc;
+            box-shadow: 2px 2px 0px #000000;
+            transform: translate(2px, 2px);
+        }
+
+        .pixel-btn-secondary {
+            background-color: #000000;
+            color: #ffffff;
+            border: 3px solid #ffffff;
+            box-shadow: 4px 4px 0px #ffffff;
+        }
+
+        .pixel-btn-secondary:hover {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 2px 2px 0px #ffffff;
+            transform: translate(2px, 2px);
+        }
+
+        .pixel-badge {
+            background: #000000;
+            border: 2px solid #ffffff;
+            box-shadow: 3px 3px 0px #ffffff;
+            color: #ffffff;
+        }
+
+        /* Scanline Effect overlay for Retro vibe */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.4)
+            );
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-white selection:text-black relative">
+
+    <!-- Scanline effect overlay -->
+    <div class="pointer-events-none fixed inset-0 z-50 scanlines opacity-40"></div>
+
+    <!-- Header Navigation -->
+    <header class="w-full border-b-4 border-white bg-black/90 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            
+            <!-- Logo / Name -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white border-2 border-black flex items-center justify-center font-bold text-xl text-black shadow-[3px_3px_0px_#fff]">
+                    A
+                </div>
+                <span class="text-sm sm:text-base font-bold tracking-wider text-white">a website</span>
+            </div>
+
+            <!-- Header Controls -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="pixel-btn-secondary px-3 py-1.5 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="lang-btn-text">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-10 space-y-12">
+
+        <!-- Hero Title Section (Moham OverKill Style) -->
+        <section class="text-center space-y-4">
+            <div class="inline-block pixel-badge px-4 py-1 text-xs font-bold">
+                // CREATOR PORTAL
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-widest text-white uppercase">
+                a website
+            </h1>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg mx-auto leading-relaxed" id="hero-desc">
+                مرحباً بكم في الموقع الرسمى لـ a
+            </p>
+        </section>
+
+        <!-- Socials / Channels Section -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b-2 border-white pb-2">
+                <span class="text-white font-bold">//</span>
+                <h2 class="text-sm sm:text-base font-bold uppercase tracking-wider text-white" id="sec-channels">القنوات والمنصات</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                
+                <!-- YouTube Card -->
+                <a href="https://www.youtube.com/@9gswa" target="_blank" rel="noopener noreferrer" class="pixel-card p-5 flex items-center justify-between group cursor-pointer block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white text-black border-2 border-white flex items-center justify-center text-2xl group-hover:bg-black group-hover:text-white transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white group-hover:underline">YouTube</h3>
+                            <p class="text-[10px] text-gray-400 mt-1" id="yt-sub">قناة المحتوى الرئيسي</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="pixel-badge px-3 py-1 text-xs font-bold">
+                            3.38K
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-white"></i>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b-2 border-white pb-2">
+                <span class="text-white font-bold">//</span>
+                <h2 class="text-sm sm:text-base font-bold uppercase tracking-wider text-white" id="sec-contact">تواصل معي</h2>
+            </div>
+
+            <div class="pixel-card p-6 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-xs font-bold text-white uppercase" id="label-email">البريد الإلكتروني للتواصل:</h3>
+                        <p class="text-xs text-gray-400 mt-1" id="contact-sub">للتواصل فقط</p>
+                    </div>
+
+                    <!-- Copyable Email Input -->
+                    <div class="flex gap-2">
+                        <input type="text" id="contact-email" value="9gswacontact@gmail.com" readonly 
+                               class="pixel-badge px-3 py-2 text-xs text-white focus:outline-none w-full sm:w-64 bg-black">
+                        <button onclick="copyEmail(event)" class="pixel-btn px-4 py-2 text-xs font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i>
+                            <span id="btn-copy">نسخ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="w-full border-t-4 border-white bg-black py-6 mt-12">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+            
+            <div class="text-white font-bold text-center sm:text-right">
+                جميع الحقوق محفوظة لـ a 2026
+            </div>
+
+            <div class="pixel-badge px-3 py-1 text-white text-[10px]" id="clock">
+                12:00:00 PM
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                langBtn: 'English',
+                heroDesc: 'مرحباً بكم في الموقع الرسمى لـ a',
+                channels: 'القنوات والمنصات',
+                contact: 'تواصل معي',
+                email: 'البريد الإلكتروني للتواصل:',
+                contactSub: 'للتواصل فقط',
+                ytSub: 'قناة المحتوى الرئيسي',
+                copy: 'نسخ',
+                copied: 'تم النسخ!',
+                dir: 'rtl'
+            },
+            en: {
+                langBtn: 'العربية',
+                heroDesc: 'Welcome to the official website of a',
+                channels: 'CHANNELS & PLATFORMS',
+                contact: 'GET IN TOUCH',
+                email: 'Contact Email:',
+                contactSub: 'For contact only',
+                ytSub: 'Main Content Channel',
+                copy: 'COPY',
+                copied: 'COPIED!',
+                dir: 'ltr'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const t = translations[currentLang];
+            
+            document.documentElement.dir = t.dir;
+            document.documentElement.lang = currentLang;
+
+            document.getElementById('lang-btn-text').textContent = t.langBtn;
+            document.getElementById('hero-desc').textContent = t.heroDesc;
+            document.getElementById('sec-channels').textContent = t.channels;
+            document.getElementById('sec-contact').textContent = t.contact;
+            document.getElementById('label-email').textContent = t.email;
+            document.getElementById('contact-sub').textContent = t.contactSub;
+            document.getElementById('yt-sub').textContent = t.ytSub;
+            document.getElementById('btn-copy').textContent = t.copy;
+        }
+
+        // Clock Update
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Copy Email logic
+        function copyEmail(e) {
+            const emailInput = document.getElementById('contact-email');
+            navigator.clipboard.writeText(emailInput.value);
+            const btnSpan = document.getElementById('btn-copy');
+            const originalText = translations[currentLang].copy;
+            
+            btnSpan.textContent = translations[currentLang].copied;
+            setTimeout(() => {
+                btnSpan.textContent = originalText;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
