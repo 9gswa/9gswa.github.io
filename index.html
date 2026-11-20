@@ -4,279 +4,1262 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>a website</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Pixel Fonts -->
+
+    <!-- Modern Typography: Cairo (Arabic) & Plus Jakarta Sans (English) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Cairo"', 'sans-serif'],
+                        arabic: ['"Cairo"', '"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        ocean: {
+                            950: '#060d18',
+                            900: '#08111e',
+                            800: '#0e1d33',
+                            700: '#162c4c',
+                        },
+                        skyglow: {
+                            300: '#bae6fd',
+                            400: '#7cc0ff',
+                            500: '#38bdf8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Base Pixel styling */
         body {
-            font-family: 'Silkscreen', 'Press Start 2P', monospace;
-            background-color: #000000;
-            color: #ffffff;
-            image-rendering: pixelated;
+            background-color: #08111e;
+            color: #f0f7ff;
+            font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Pixel-art Custom Borders & Shadows */
-        .pixel-card {
-            background-color: #050505;
-            border: 3px solid #ffffff;
-            box-shadow: 6px 6px 0px #ffffff;
-            transition: all 0.15s ease-in-out;
+        html[lang="en"] body {
+            font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
         }
 
-        .pixel-card:hover {
-            border-color: #ffffff;
-            box-shadow: 8px 8px 0px #ffffff;
-            transform: translateY(-2px);
+        /* Serene Watercolor Ambient Glows */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 9999px;
+            filter: blur(110px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.42;
         }
 
-        .pixel-btn {
-            background-color: #ffffff;
-            color: #000000;
-            border: 3px solid #ffffff;
-            box-shadow: 4px 4px 0px #000000;
-            text-transform: uppercase;
+        /* Glassmorphism Card Styling */
+        .glass-card {
+            background: rgba(14, 29, 51, 0.58);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(124, 192, 255, 0.16);
+            box-shadow: 0 20px 50px rgba(3, 8, 18, 0.55);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .pixel-btn:hover {
-            background-color: #cccccc;
-            box-shadow: 2px 2px 0px #000000;
-            transform: translate(2px, 2px);
+        .glass-card:hover {
+            border-color: rgba(124, 192, 255, 0.38);
+            box-shadow: 0 24px 60px rgba(56, 189, 248, 0.12);
         }
 
-        .pixel-btn-secondary {
-            background-color: #000000;
-            color: #ffffff;
-            border: 3px solid #ffffff;
-            box-shadow: 4px 4px 0px #ffffff;
+        .glass-subtle {
+            background: rgba(8, 17, 30, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(124, 192, 255, 0.14);
         }
 
-        .pixel-btn-secondary:hover {
-            background-color: #ffffff;
-            color: #000000;
-            box-shadow: 2px 2px 0px #ffffff;
-            transform: translate(2px, 2px);
+        /* Floating gentle animation for butterfly sparkles */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(4deg); }
+        }
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
         }
 
-        .pixel-badge {
-            background: #000000;
-            border: 2px solid #ffffff;
-            box-shadow: 3px 3px 0px #ffffff;
-            color: #ffffff;
+        /* Custom sleek scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* Scanline Effect overlay for Retro vibe */
-        .scanlines {
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0, 0, 0, 0.4) 50%,
-                rgba(0, 0, 0, 0.4)
-            );
-            background-size: 100% 4px;
+        ::-webkit-scrollbar-track {
+            background: #08111e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1d3b66;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-white selection:text-black relative">
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-sky-400 selection:text-ocean-950">
 
-    <!-- Scanline effect overlay -->
-    <div class="pointer-events-none fixed inset-0 z-50 scanlines opacity-40"></div>
+    <!-- Ambient Watercolor Background Orbs -->
+    <div class="ambient-orb w-[420px] h-[420px] bg-sky-500/30 -top-24 -left-24"></div>
+    <div class="ambient-orb w-[500px] h-[500px] bg-blue-600/25 top-1/3 -right-32"></div>
+    <div class="ambient-orb w-[380px] h-[380px] bg-cyan-400/20 bottom-10 left-1/4"></div>
 
-    <!-- Header Navigation -->
-    <header class="w-full border-b-4 border-white bg-black/90 backdrop-blur sticky top-0 z-40">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-            
-            <!-- Logo / Name -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-white border-2 border-black flex items-center justify-center font-bold text-xl text-black shadow-[3px_3px_0px_#fff]">
-                    A
+    <!-- Notification Toast (Replaces alert) -->
+    <div id="app-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-300">
+        <div class="glass-card border-sky-400/40 bg-ocean-800/95 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-medium text-white">
+            <span id="toast-icon" class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+            <span id="toast-message">تم التنفيذ بنجاح</span>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal (Replaces confirm) -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ocean-950/80 backdrop-blur-md">
+        <div class="glass-card max-w-sm w-full rounded-3xl p-6 space-y-5 text-center border-sky-400/30">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30 flex items-center justify-center mx-auto">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+            </div>
+            <div class="space-y-1.5">
+                <h3 id="confirm-title" class="text-lg font-bold text-white">حذف المشاركة؟</h3>
+                <p id="confirm-desc" class="text-xs sm:text-sm text-sky-200/75">هل أنت متأكد أنك تريد حذف هذه الصورة من المتحف؟</p>
+            </div>
+            <div class="flex items-center gap-3 pt-1">
+                <button id="confirm-cancel-btn" class="flex-1 py-2.5 px-4 rounded-xl glass-subtle hover:bg-white/10 text-sm font-semibold text-sky-100 transition">
+                    إلغاء
+                </button>
+                <button id="confirm-ok-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-rose-500 hover:bg-rose-400 text-white text-sm font-semibold transition shadow-lg shadow-rose-500/25">
+                    حذف
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Selection Modal (Google + Quick Member Login Fallback) -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ocean-950/80 backdrop-blur-md" onclick="closeAuthModal(event)">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 sm:p-7 space-y-5 border-sky-400/30 relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-sky-300/15 pb-4">
+                <div>
+                    <h3 id="auth-modal-title" class="text-lg sm:text-xl font-bold text-white">تسجيل الدخول / إنشاء حساب</h3>
+                    <p id="auth-modal-sub" class="text-xs text-sky-200/70 mt-0.5">ادخل للمشاركة في متحف صور المتابعين</p>
                 </div>
-                <span class="text-sm sm:text-base font-bold tracking-wider text-white">a website</span>
+                <button onclick="closeAuthModal()" class="w-9 h-9 rounded-xl glass-subtle hover:bg-white/10 flex items-center justify-center text-sky-200 transition">
+                    ✕
+                </button>
             </div>
 
-            <!-- Header Controls -->
-            <div class="flex items-center gap-3">
-                <button onclick="toggleLanguage()" class="pixel-btn-secondary px-3 py-1.5 text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-globe"></i>
-                    <span id="lang-btn-text">English</span>
+            <!-- Google Button -->
+            <button type="button" onclick="triggerGooglePopup()" class="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-sky-50 text-ocean-950 font-bold text-sm shadow-lg flex items-center justify-center gap-3 transition">
+                <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                </svg>
+                <span id="google-popup-label">المتابعة باستخدام Google</span>
+            </button>
+
+            <div class="relative flex items-center py-1">
+                <div class="flex-grow border-t border-sky-300/15"></div>
+                <span id="auth-or-text" class="flex-shrink mx-3 text-xs text-sky-300/60">أو الدخول السريع</span>
+                <div class="flex-grow border-t border-sky-300/15"></div>
+            </div>
+
+            <!-- Instant Member Form (Works inside iFrames without popups) -->
+            <form onsubmit="handleQuickMemberLogin(event)" class="space-y-3.5">
+                <div class="space-y-1">
+                    <label id="label-member-name" class="block text-xs font-semibold text-sky-200">الاسم المستعار</label>
+                    <input type="text" id="member-name-input" required maxlength="30" placeholder="اكتب اسمك الذي سيظهر على صورك"
+                        class="w-full rounded-xl bg-ocean-950/70 border border-sky-300/20 focus:border-sky-400 focus:outline-none px-4 py-2.5 text-sm text-white placeholder-sky-200/30 transition">
+                </div>
+                <div class="space-y-1">
+                    <label id="label-member-email" class="block text-xs font-semibold text-sky-200">البريد الإلكتروني (اختياري)</label>
+                    <input type="email" id="member-email-input" placeholder="name@gmail.com" dir="ltr"
+                        class="w-full rounded-xl bg-ocean-950/70 border border-sky-300/20 focus:border-sky-400 focus:outline-none px-4 py-2.5 text-sm text-white placeholder-sky-200/30 transition">
+                </div>
+                <button type="submit" id="quick-login-btn" class="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-sky-400 to-blue-500 hover:from-sky-300 hover:to-blue-400 text-ocean-950 font-bold text-sm shadow-lg shadow-sky-500/20 transition">
+                    دخول مباشر للمتحف
                 </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Image Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-8 bg-ocean-950/90 backdrop-blur-xl" onclick="closeLightbox(event)">
+        <div class="relative max-w-3xl w-full glass-card rounded-3xl overflow-hidden border-sky-300/25 shadow-2xl" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute top-4 end-4 z-10 w-10 h-10 rounded-full bg-ocean-950/75 hover:bg-sky-500 text-white hover:text-ocean-950 border border-white/15 flex items-center justify-center transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="bg-ocean-950/80 flex items-center justify-center max-h-[70vh] overflow-hidden">
+                <img id="lightbox-img" src="" alt="Fan Art Preview" class="w-full h-full max-h-[70vh] object-contain">
+            </div>
+            <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-ocean-900/90">
+                <div>
+                    <h4 id="lightbox-title" class="text-base sm:text-lg font-bold text-white"></h4>
+                    <p id="lightbox-author" class="text-xs sm:text-sm text-sky-300/80 mt-0.5"></p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="lightbox-like-btn" class="px-4 py-2 rounded-xl glass-subtle hover:border-sky-400/50 text-sm font-semibold flex items-center gap-2 transition">
+                        <span id="lightbox-heart">♥</span>
+                        <span id="lightbox-likes-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Art Modal -->
+    <div id="upload-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ocean-950/80 backdrop-blur-md" onclick="closeUploadModal(event)">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-7 space-y-5 border-sky-400/30 relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-sky-300/15 pb-4">
+                <div>
+                    <h3 id="modal-upload-title" class="text-lg sm:text-xl font-bold text-white">إضافة صورة إلى المتحف</h3>
+                    <p id="modal-upload-sub" class="text-xs text-sky-200/70 mt-0.5">شارك رسمتك أو تصميمك مع مجتمع a</p>
+                </div>
+                <button onclick="closeUploadModal()" class="w-9 h-9 rounded-xl glass-subtle hover:bg-white/10 flex items-center justify-center text-sky-200 transition">
+                    ✕
+                </button>
+            </div>
+
+            <form id="art-form" onsubmit="handleArtSubmit(event)" class="space-y-4">
+                <!-- Title Input -->
+                <div class="space-y-1.5">
+                    <label id="label-art-title" class="block text-xs font-semibold text-sky-200">عنوان الصورة / الرسمة</label>
+                    <input type="text" id="art-title-input" required maxlength="60" placeholder="مثال: رسمة لـ a مع الفراشات الزرقاء"
+                        class="w-full rounded-xl bg-ocean-950/70 border border-sky-300/20 focus:border-sky-400 focus:outline-none px-4 py-3 text-sm text-white placeholder-sky-200/30 transition">
+                </div>
+
+                <!-- Source Mode Switcher (File Upload vs Image URL) -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label id="label-art-source" class="block text-xs font-semibold text-sky-200">اختيار الصورة</label>
+                        <div class="flex rounded-xl bg-ocean-950/80 p-1 border border-sky-300/15 text-xs">
+                            <button type="button" id="tab-file" onclick="switchUploadTab('file')" class="px-3 py-1 rounded-lg bg-sky-400 text-ocean-950 font-bold transition">
+                                رفع ملف
+                            </button>
+                            <button type="button" id="tab-url" onclick="switchUploadTab('url')" class="px-3 py-1 rounded-lg text-sky-200/75 hover:text-white font-semibold transition">
+                                رابط صورة
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- File Dropzone -->
+                    <div id="input-file-wrapper">
+                        <label for="art-file-input" class="flex flex-col items-center justify-center w-full h-36 rounded-2xl border-2 border-dashed border-sky-300/25 hover:border-sky-400/60 bg-ocean-950/50 cursor-pointer transition p-4 text-center">
+                            <svg class="w-8 h-8 text-sky-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span id="dropzone-text" class="text-xs sm:text-sm font-medium text-sky-100">اضغط لاختيار صورة من جهازك</span>
+                            <span id="dropzone-hint" class="text-[11px] text-sky-300/60 mt-1">PNG, JPG, WEBP (يتم ضغطها تلقائياً)</span>
+                            <input type="file" id="art-file-input" accept="image/*" class="hidden" onchange="previewSelectedFile(event)">
+                        </label>
+                    </div>
+
+                    <!-- URL Input -->
+                    <div id="input-url-wrapper" class="hidden">
+                        <input type="url" id="art-url-input" placeholder="https://example.com/image.png" oninput="previewUrlImage(this.value)"
+                            class="w-full rounded-xl bg-ocean-950/70 border border-sky-300/20 focus:border-sky-400 focus:outline-none px-4 py-3 text-sm text-white placeholder-sky-200/30 transition" dir="ltr">
+                    </div>
+                </div>
+
+                <!-- Live Image Preview -->
+                <div id="upload-preview-box" class="hidden rounded-2xl overflow-hidden border border-sky-300/20 bg-ocean-950/70 max-h-44 flex items-center justify-center">
+                    <img id="upload-preview-img" src="" alt="Preview" class="max-h-44 w-auto object-contain">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-art-btn" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-sky-400 to-blue-500 hover:from-sky-300 hover:to-blue-400 text-ocean-950 font-bold text-sm shadow-lg shadow-sky-500/25 transition flex items-center justify-center gap-2">
+                    <span id="submit-btn-label">نشر في المتحف</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Top Glass Navbar -->
+    <header class="sticky top-0 z-40 border-b border-sky-300/10 bg-ocean-900/75 backdrop-blur-xl">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
+            
+            <!-- Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-2xl overflow-hidden border border-sky-300/40 shadow-md shadow-sky-500/15 group-hover:scale-105 transition-transform">
+                    <img src="IMG_6979.jpeg" alt="a" onerror="this.onerror=null; this.src='https://placehold.co/100x100/162C4C/BAE6FD?text=a';" class="w-full h-full object-cover">
+                </div>
+                <span class="text-base sm:text-lg font-extrabold tracking-tight text-white">
+                    a website
+                </span>
+            </a>
+
+            <!-- Right Controls: Language + Google Auth -->
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                
+                <!-- Language Switcher -->
+                <button onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl glass-subtle hover:border-sky-400/40 text-xs sm:text-sm font-semibold text-sky-100 flex items-center gap-2 transition">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                    </svg>
+                    <span id="lang-label">English</span>
+                </button>
+
+                <!-- Auth Area: Logged Out State -->
+                <button id="google-signin-btn" onclick="openAuthModal()" class="px-4 py-2 rounded-xl bg-white hover:bg-sky-50 text-ocean-950 text-xs sm:text-sm font-bold shadow-lg shadow-black/20 flex items-center gap-2.5 transition">
+                    <!-- Official Google Multi-Color G SVG -->
+                    <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                    </svg>
+                    <span id="signin-text">تسجيل الدخول</span>
+                </button>
+
+                <!-- Auth Area: Logged In Profile Pill -->
+                <div id="user-profile-pill" class="hidden items-center gap-2.5 ps-2 pe-1.5 py-1 rounded-2xl glass-subtle border-sky-400/30">
+                    <img id="user-avatar-img" src="" alt="User" class="w-7 h-7 rounded-xl object-cover border border-sky-300/40">
+                    <span id="user-display-name" class="text-xs font-bold text-white max-w-[90px] sm:max-w-[130px] truncate"></span>
+                    <button onclick="handleSignOut()" id="signout-btn" title="Sign Out" class="px-2.5 py-1 rounded-xl bg-rose-500/15 hover:bg-rose-500 text-rose-300 hover:text-white text-[11px] font-bold transition">
+                        خروج
+                    </button>
+                </div>
+
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-4xl mx-auto w-full px-4 py-10 space-y-12">
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-5xl mx-auto w-full px-4 sm:px-6 py-10 sm:py-14 space-y-14">
 
-        <!-- Hero Title Section (Moham OverKill Style) -->
-        <section class="text-center space-y-4">
-            <div class="inline-block pixel-badge px-4 py-1 text-xs font-bold">
-                // CREATOR PORTAL
-            </div>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-widest text-white uppercase">
-                a website
-            </h1>
-            <p class="text-xs sm:text-sm text-gray-300 max-w-lg mx-auto leading-relaxed" id="hero-desc">
-                مرحباً بكم في الموقع الرسمى لـ a
-            </p>
-        </section>
+        <!-- Hero Section -->
+        <section class="glass-card rounded-[2rem] p-8 sm:p-12 text-center relative overflow-hidden">
+            <!-- Decorative subtle butterfly SVG accents matching avatar -->
+            <svg class="w-7 h-7 text-sky-400/35 absolute top-7 start-8 animate-float" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c-2.5-4.5-7-6.5-9.5-4.5S1 14 5.5 15.5c-2.5 1.5-2 5 .5 5.5s5.5-2.5 6-6c.5 3.5 3.5 6.5 6 6s3-4 .5-5.5C23 14 24 9.5 21.5 7.5S14.5 7.5 12 12z"/>
+            </svg>
+            <svg class="w-5 h-5 text-blue-300/30 absolute bottom-8 end-10 animate-float" style="animation-delay: 2s;" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c-2.5-4.5-7-6.5-9.5-4.5S1 14 5.5 15.5c-2.5 1.5-2 5 .5 5.5s5.5-2.5 6-6c.5 3.5 3.5 6.5 6 6s3-4 .5-5.5C23 14 24 9.5 21.5 7.5S14.5 7.5 12 12z"/>
+            </svg>
 
-        <!-- Socials / Channels Section -->
-        <section class="space-y-4">
-            <div class="flex items-center gap-2 border-b-2 border-white pb-2">
-                <span class="text-white font-bold">//</span>
-                <h2 class="text-sm sm:text-base font-bold uppercase tracking-wider text-white" id="sec-channels">القنوات والمنصات</h2>
-            </div>
-
-            <div class="grid grid-cols-1 gap-4">
-                
-                <!-- YouTube Card -->
-                <a href="https://www.youtube.com/@9gswa" target="_blank" rel="noopener noreferrer" class="pixel-card p-5 flex items-center justify-between group cursor-pointer block">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-white text-black border-2 border-white flex items-center justify-center text-2xl group-hover:bg-black group-hover:text-white transition-colors">
-                            <i class="fa-brands fa-youtube"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white group-hover:underline">YouTube</h3>
-                            <p class="text-[10px] text-gray-400 mt-1" id="yt-sub">قناة المحتوى الرئيسي</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="pixel-badge px-3 py-1 text-xs font-bold">
-                            3.38K
-                        </div>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-white"></i>
-                    </div>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="space-y-4">
-            <div class="flex items-center gap-2 border-b-2 border-white pb-2">
-                <span class="text-white font-bold">//</span>
-                <h2 class="text-sm sm:text-base font-bold uppercase tracking-wider text-white" id="sec-contact">تواصل معي</h2>
-            </div>
-
-            <div class="pixel-card p-6 space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <h3 class="text-xs font-bold text-white uppercase" id="label-email">البريد الإلكتروني للتواصل:</h3>
-                        <p class="text-xs text-gray-400 mt-1" id="contact-sub">للتواصل فقط</p>
-                    </div>
-
-                    <!-- Copyable Email Input -->
-                    <div class="flex gap-2">
-                        <input type="text" id="contact-email" value="9gswacontact@gmail.com" readonly 
-                               class="pixel-badge px-3 py-2 text-xs text-white focus:outline-none w-full sm:w-64 bg-black">
-                        <button onclick="copyEmail(event)" class="pixel-btn px-4 py-2 text-xs font-bold flex items-center gap-2">
-                            <i class="fa-solid fa-copy"></i>
-                            <span id="btn-copy">نسخ</span>
-                        </button>
+            <div class="max-w-xl mx-auto flex flex-col items-center space-y-5">
+                <!-- Full-Color Soft Rounded Channel Avatar -->
+                <div class="relative group">
+                    <div class="absolute -inset-1.5 rounded-[2rem] bg-gradient-to-tr from-sky-400 via-blue-400 to-white opacity-45 blur-md group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-[1.75rem] overflow-hidden border-2 border-white/80 shadow-2xl bg-ocean-800">
+                        <img src="IMG_6979.jpeg" alt="a channel avatar" onerror="this.onerror=null; this.src='https://placehold.co/300x300/162C4C/F0F7FF?text=a';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                 </div>
+
+                <!-- Badge -->
+                <span class="px-3.5 py-1 rounded-full bg-sky-400/15 border border-sky-300/25 text-sky-300 text-xs font-semibold tracking-wide">
+                    @9gswa • Content Creator
+                </span>
+
+                <!-- Main Title -->
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+                    a website
+                </h1>
+
+                <p id="hero-desc" class="text-sm sm:text-base text-sky-100/75 leading-relaxed max-w-md">
+                    المساحة الرسمية لصانع المحتوى <span class="text-white font-bold">a</span> — استكشف القناة، تواصل معي، وشارك إبداعاتك في متحف المتابعين.
+                </p>
+
+                <!-- Quick Anchor Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                    <a href="https://www.youtube.com/@9gswa" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-2xl bg-sky-400 hover:bg-sky-300 text-ocean-950 font-bold text-xs sm:text-sm shadow-lg shadow-sky-400/25 transition flex items-center gap-2">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <span id="hero-yt-btn">زيارة القناة (3.38k)</span>
+                    </a>
+                    <a href="#museum-section" class="px-5 py-2.5 rounded-2xl glass-subtle hover:border-sky-400/45 text-white font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+                        <span>✦</span>
+                        <span id="hero-museum-btn">متحف صور المتابعين</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Two-Column Grid: Channel & Contact -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- YouTube Channel Card -->
+            <section class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="card-ch-tag" class="text-xs font-bold uppercase tracking-wider text-sky-300">القنوات</span>
+                    <span class="px-3 py-1 rounded-full bg-sky-400/15 text-sky-300 text-xs font-bold">
+                        3.38k <span id="subs-word">مشترك</span>
+                    </span>
+                </div>
+
+                <a href="https://www.youtube.com/@9gswa" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-ocean-950/55 hover:bg-ocean-950/85 border border-sky-300/15 hover:border-sky-400/40 transition group">
+                    <div class="w-14 h-14 rounded-2xl overflow-hidden border border-sky-300/30 shrink-0">
+                        <img src="IMG_6979.jpeg" alt="@9gswa" onerror="this.onerror=null; this.src='https://placehold.co/120x120/162C4C/F0F7FF?text=YT';" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-base sm:text-lg font-bold text-white truncate">YouTube</h2>
+                            <svg class="w-4 h-4 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs sm:text-sm text-sky-200/70 truncate mt-0.5" dir="ltr">@9gswa</p>
+                    </div>
+                    <div class="w-9 h-9 rounded-xl bg-sky-400/15 group-hover:bg-sky-400 text-sky-300 group-hover:text-ocean-950 flex items-center justify-center transition">
+                        ↗
+                    </div>
+                </a>
+            </section>
+
+            <!-- Contact Card (Direct Contact Only) -->
+            <section class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-6">
+                <div class="flex items-center justify-between">
+                    <span id="card-contact-tag" class="text-xs font-bold uppercase tracking-wider text-sky-300">التواصل</span>
+                    <span id="contact-only-badge" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sky-200/80 text-xs font-semibold">
+                        للتواصل فقط
+                    </span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-ocean-950/60 border border-sky-300/15 flex items-center justify-between gap-2">
+                        <span class="text-xs sm:text-sm font-semibold text-white select-all truncate" dir="ltr">9gswacontact@gmail.com</span>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="copyEmail()" id="copy-btn" class="px-3 py-1.5 rounded-xl bg-sky-400/15 hover:bg-sky-400 text-sky-300 hover:text-ocean-950 text-xs font-bold transition">
+                                نسخ
+                            </button>
+                            <a href="mailto:9gswacontact@gmail.com" id="mail-btn" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition">
+                                إرسال
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Fan Art & Community Museum Section -->
+        <section id="museum-section" class="space-y-6 pt-2">
+            <!-- Header Bar -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-sky-400/20 border border-sky-300/30 text-sky-300 flex items-center justify-center text-sm">✦</span>
+                        <h2 id="museum-title" class="text-xl sm:text-2xl font-extrabold text-white">متحف صور المتابعين</h2>
+                    </div>
+                    <p id="museum-subtitle" class="text-xs sm:text-sm text-sky-200/75">
+                        معرض خاص يجمع رسمات وإبداعات المتابعين — سجل دخولك بحساب جوجل لإضافة صورتك!
+                    </p>
+                </div>
+
+                <button onclick="openUploadModal()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-sky-400 to-blue-500 hover:from-sky-300 hover:to-blue-400 text-ocean-950 font-bold text-xs sm:text-sm shadow-lg shadow-sky-500/20 transition flex items-center justify-center gap-2 shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    <span id="add-art-btn-text">أضف صورتك للمتحف</span>
+                </button>
+            </div>
+
+            <!-- Museum Gallery Grid -->
+            <div id="museum-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards injected dynamically from Firestore -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="museum-loading" class="glass-card rounded-3xl p-12 text-center space-y-3">
+                <div class="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <p id="loading-text" class="text-xs sm:text-sm text-sky-200/75">جاري تحميل صور المتحف...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="museum-empty" class="hidden glass-card rounded-3xl p-12 text-center space-y-3">
+                <div class="w-12 h-12 rounded-2xl bg-sky-400/15 text-sky-300 flex items-center justify-center mx-auto text-xl">🖼️</div>
+                <h3 id="empty-title" class="text-base font-bold text-white">المتحف بانتظار أول مشاركة!</h3>
+                <p id="empty-desc" class="text-xs sm:text-sm text-sky-200/70 max-w-sm mx-auto">كن أول من يضيف رسمة أو صورة تذكارية في متحف المتابعين.</p>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer Section -->
-    <footer class="w-full border-t-4 border-white bg-black py-6 mt-12">
-        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-            
-            <div class="text-white font-bold text-center sm:text-right">
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-sky-300/10 bg-ocean-950/70 backdrop-blur-md py-6 mt-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-sky-200/75">
+            <p id="footer-rights" class="font-semibold text-white">
                 جميع الحقوق محفوظة لـ a 2026
-            </div>
-
-            <div class="pixel-badge px-3 py-1 text-white text-[10px]" id="clock">
-                12:00:00 PM
-            </div>
-
+            </p>
+            <span class="text-xs text-sky-300/60">a website • @9gswa</span>
         </div>
     </footer>
 
-    <!-- Interactive Script -->
+    <!-- Firebase Authentication & Firestore Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signInWithCustomToken,
+            signInAnonymously,
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import {
+            getFirestore,
+            collection,
+            doc,
+            addDoc,
+            updateDoc,
+            deleteDoc,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Environment globals
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+
+        let app = null;
+        let auth = null;
+        let db = null;
+        let currentUser = null; // Real Google user (non-anonymous)
+        let authUser = null;    // Any active Firebase auth session (for read rules)
+        let museumPosts = [];
+        let activeLightboxPostId = null;
+        let uploadMode = 'file';
+        let compressedBase64Image = '';
+
+        // Initialize Firebase cleanly
+        async function initFirebase() {
+            if (!firebaseConfig) {
+                document.getElementById('museum-loading').classList.add('hidden');
+                document.getElementById('museum-empty').classList.remove('hidden');
+                return;
+            }
+
+            try {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Authenticate first per platform rules
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    try {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } catch (e) {
+                        await signInAnonymously(auth);
+                    }
+                } else if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    authUser = user;
+                    const savedQuickUser = localStorage.getItem('a_website_member');
+
+                    // Treat non-anonymous users OR saved quick members as signed in
+                    if (user && !user.isAnonymous) {
+                        currentUser = user;
+                        updateAuthUI(true);
+                    } else if (user && savedQuickUser) {
+                        try {
+                            const parsed = JSON.parse(savedQuickUser);
+                            currentUser = {
+                                uid: user.uid,
+                                displayName: parsed.displayName,
+                                email: parsed.email || '',
+                                photoURL: `https://placehold.co/100x100/38BDF8/08111E?text=${encodeURIComponent(
+                                    (parsed.displayName || 'A').charAt(0).toUpperCase()
+                                )}`
+                            };
+                            updateAuthUI(true);
+                        } catch (e) {
+                            currentUser = null;
+                            updateAuthUI(false);
+                        }
+                    } else {
+                        currentUser = null;
+                        updateAuthUI(false);
+                    }
+
+                    if (user) {
+                        subscribeToMuseum();
+                    }
+                });
+            } catch (error) {
+                console.error("Firebase init error:", error);
+                document.getElementById('museum-loading').classList.add('hidden');
+            }
+        }
+
+        // Open / Close Auth Modal
+        window.openAuthModal = function () {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        window.closeAuthModal = function (e) {
+            if (e && e.target !== e.currentTarget) return;
+            const modal = document.getElementById('auth-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        // Google Sign-In Popup Handler
+        window.triggerGooglePopup = async function () {
+            if (!auth) {
+                showToast(currentLang === 'ar' ? 'استخدم الدخول السريع بالأسفل' : 'Please use Quick Login below');
+                return;
+            }
+            try {
+                const provider = new GoogleAuthProvider();
+                provider.setCustomParameters({ prompt: 'select_account' });
+                const result = await signInWithPopup(auth, provider);
+                currentUser = result.user;
+                localStorage.removeItem('a_website_member');
+                closeAuthModal();
+                updateAuthUI(true);
+                showToast(
+                    currentLang === 'ar'
+                        ? `أهلاً بك، ${currentUser.displayName || 'صديقي'}!`
+                        : `Welcome, ${currentUser.displayName || 'Friend'}!`
+                );
+            } catch (error) {
+                console.error("Google Sign-In error:", error);
+                if (error.code === 'auth/popup-closed-by-user') return;
+                showToast(
+                    currentLang === 'ar'
+                        ? 'المعاينة تحظر نوافذ جوجل المنبثقة — استخدم "الدخول السريع" بالأسفل مباشرة!'
+                        : 'Preview blocks Google popups — use "Quick Login" right below!'
+                );
+            }
+        };
+
+        // Instant Member Login (Works inside iFrames without popup blockers)
+        window.handleQuickMemberLogin = async function (event) {
+            event.preventDefault();
+            const nameVal = document.getElementById('member-name-input').value.trim();
+            const emailVal = document.getElementById('member-email-input').value.trim();
+            if (!nameVal) return;
+
+            try {
+                if (auth && !auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
+                const uid = (auth && auth.currentUser) ? auth.currentUser.uid : 'local_' + Date.now();
+                localStorage.setItem('a_website_member', JSON.stringify({ displayName: nameVal, email: emailVal }));
+
+                currentUser = {
+                    uid: uid,
+                    displayName: nameVal,
+                    email: emailVal,
+                    photoURL: `https://placehold.co/100x100/38BDF8/08111E?text=${encodeURIComponent(
+                        nameVal.charAt(0).toUpperCase()
+                    )}`
+                };
+
+                closeAuthModal();
+                updateAuthUI(true);
+                showToast(
+                    currentLang === 'ar'
+                        ? `أهلاً بك يا ${nameVal}! يمكنك الآن إضافة صورك للمتحف`
+                        : `Welcome ${nameVal}! You can now post to the museum`
+                );
+            } catch (err) {
+                console.error("Quick login error:", err);
+            }
+        };
+
+        // Sign Out Handler
+        window.handleSignOut = async function () {
+            localStorage.removeItem('a_website_member');
+            if (!auth) {
+                currentUser = null;
+                updateAuthUI(false);
+                return;
+            }
+            try {
+                await signOut(auth);
+                await signInAnonymously(auth);
+                currentUser = null;
+                updateAuthUI(false);
+                showToast(currentLang === 'ar' ? 'تم تسجيل الخروج' : 'Signed out');
+            } catch (error) {
+                console.error("Sign out error:", error);
+            }
+        };
+
+        function updateAuthUI(isLoggedIn) {
+            const signInBtn = document.getElementById('google-signin-btn');
+            const profilePill = document.getElementById('user-profile-pill');
+
+            if (isLoggedIn && currentUser) {
+                signInBtn.classList.add('hidden');
+                profilePill.classList.remove('hidden');
+                profilePill.classList.add('flex');
+
+                document.getElementById('user-display-name').textContent = currentUser.displayName || 'Google User';
+                document.getElementById('user-avatar-img').src =
+                    currentUser.photoURL || 'https://placehold.co/80x80/38BDF8/08111E?text=U';
+            } else {
+                signInBtn.classList.remove('hidden');
+                profilePill.classList.add('hidden');
+                profilePill.classList.remove('flex');
+            }
+            renderMuseumGrid();
+        }
+
+        // Subscribe to Public Museum Collection (Rule 1 & Rule 2 compliant)
+        let unsubscribeMuseum = null;
+        function subscribeToMuseum() {
+            if (!db || !authUser || unsubscribeMuseum) return;
+
+            const museumCol = collection(db, 'artifacts', appId, 'public', 'data', 'fan_museum');
+            unsubscribeMuseum = onSnapshot(
+                museumCol,
+                (snapshot) => {
+                    const items = [];
+                    snapshot.forEach((docSnap) => {
+                        items.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    // Sort newest first in JS memory
+                    items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    museumPosts = items;
+
+                    document.getElementById('museum-loading').classList.add('hidden');
+                    renderMuseumGrid();
+
+                    // Refresh lightbox if open
+                    if (activeLightboxPostId) {
+                        const updated = museumPosts.find((p) => p.id === activeLightboxPostId);
+                        if (updated) updateLightboxStats(updated);
+                    }
+                },
+                (err) => {
+                    console.error("Firestore snapshot error:", err);
+                    document.getElementById('museum-loading').classList.add('hidden');
+                }
+            );
+        }
+
+        // Render Fan Museum Cards
+        window.renderMuseumGrid = function () {
+            const grid = document.getElementById('museum-grid');
+            const emptyState = document.getElementById('museum-empty');
+
+            if (!museumPosts.length) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            const uid = currentUser ? currentUser.uid : null;
+
+            grid.innerHTML = museumPosts
+                .map((post) => {
+                    const likedBy = Array.isArray(post.likedBy) ? post.likedBy : [];
+                    const isLiked = uid ? likedBy.includes(uid) : false;
+                    const isOwner = uid && post.authorUid === uid;
+                    const safeTitle = escapeHtml(post.title || 'Artwork');
+                    const safeAuthor = escapeHtml(post.authorName || 'Fan');
+                    const authorAvatar =
+                        post.authorPhoto || 'https://placehold.co/64x64/162C4C/BAE6FD?text=a';
+
+                    return `
+                    <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+                        <!-- Image Thumbnail -->
+                        <div onclick="openLightbox('${post.id}')" class="relative aspect-[4/3] bg-ocean-950/80 overflow-hidden cursor-pointer">
+                            <img src="${post.imageUrl}" alt="${safeTitle}" loading="lazy"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x450/0E1D33/7CC0FF?text=Artwork';"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4">
+                                <span class="text-xs font-semibold text-white bg-ocean-950/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
+                                    ${currentLang === 'ar' ? 'اضغط للتكبير' : 'Click to expand'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Info -->
+                        <div class="p-4 sm:p-5 space-y-3.5">
+                            <h3 class="text-sm sm:text-base font-bold text-white line-clamp-1">${safeTitle}</h3>
+
+                            <div class="flex items-center justify-between gap-2 pt-1 border-t border-sky-300/10">
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <img src="${authorAvatar}" alt="${safeAuthor}" class="w-6 h-6 rounded-full object-cover border border-sky-300/30 shrink-0">
+                                    <span class="text-xs text-sky-200/80 font-medium truncate">${safeAuthor}</span>
+                                </div>
+
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    ${
+                                        isOwner
+                                            ? `<button onclick="requestDeletePost('${post.id}')" title="${
+                                                  currentLang === 'ar' ? 'حذف' : 'Delete'
+                                              }" class="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-300 hover:text-white transition">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>`
+                                            : ''
+                                    }
+
+                                    <button onclick="toggleLikePost('${post.id}')" class="px-3 py-1.5 rounded-xl border ${
+                                        isLiked
+                                            ? 'bg-sky-400/20 border-sky-400/50 text-sky-300'
+                                            : 'bg-white/5 border-white/10 text-sky-200/75 hover:border-sky-400/35'
+                                    } text-xs font-bold flex items-center gap-1.5 transition">
+                                        <span>${isLiked ? '♥' : '♡'}</span>
+                                        <span>${likedBy.length}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>`;
+                })
+                .join('');
+        };
+
+        // Upload Modal Logic
+        window.openUploadModal = function () {
+            if (!currentUser) {
+                showToast(
+                    currentLang === 'ar'
+                        ? 'سجل دخولك أولاً لإضافة صورة إلى المتحف'
+                        : 'Please sign in first to submit artwork'
+                );
+                openAuthModal();
+                return;
+            }
+            document.getElementById('upload-modal').classList.remove('hidden');
+            document.getElementById('upload-modal').classList.add('flex');
+        };
+
+        window.closeUploadModal = function (e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.getElementById('upload-modal').classList.add('hidden');
+            document.getElementById('upload-modal').classList.remove('flex');
+        };
+
+        window.switchUploadTab = function (mode) {
+            uploadMode = mode;
+            const fileWrap = document.getElementById('input-file-wrapper');
+            const urlWrap = document.getElementById('input-url-wrapper');
+            const tabFile = document.getElementById('tab-file');
+            const tabUrl = document.getElementById('tab-url');
+
+            if (mode === 'file') {
+                fileWrap.classList.remove('hidden');
+                urlWrap.classList.add('hidden');
+                tabFile.className = 'px-3 py-1 rounded-lg bg-sky-400 text-ocean-950 font-bold transition';
+                tabUrl.className = 'px-3 py-1 rounded-lg text-sky-200/75 hover:text-white font-semibold transition';
+            } else {
+                fileWrap.classList.add('hidden');
+                urlWrap.classList.remove('hidden');
+                tabUrl.className = 'px-3 py-1 rounded-lg bg-sky-400 text-ocean-950 font-bold transition';
+                tabFile.className = 'px-3 py-1 rounded-lg text-sky-200/75 hover:text-white font-semibold transition';
+            }
+        };
+
+        // Compress selected file cleanly so it fits comfortably in Firestore (< 450KB)
+        window.previewSelectedFile = function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const MAX_DIM = 900;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > MAX_DIM || height > MAX_DIM) {
+                        if (width > height) {
+                            height = Math.round((height * MAX_DIM) / width);
+                            width = MAX_DIM;
+                        } else {
+                            width = Math.round((width * MAX_DIM) / height);
+                            height = MAX_DIM;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    compressedBase64Image = canvas.toDataURL('image/jpeg', 0.82);
+                    const previewBox = document.getElementById('upload-preview-box');
+                    const previewImg = document.getElementById('upload-preview-img');
+                    previewImg.src = compressedBase64Image;
+                    previewBox.classList.remove('hidden');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
+        window.previewUrlImage = function (url) {
+            const previewBox = document.getElementById('upload-preview-box');
+            const previewImg = document.getElementById('upload-preview-img');
+            if (url && url.startsWith('http')) {
+                previewImg.src = url;
+                previewBox.classList.remove('hidden');
+            } else {
+                previewBox.classList.add('hidden');
+            }
+        };
+
+        // Submit Artwork to Firestore
+        window.handleArtSubmit = async function (event) {
+            event.preventDefault();
+            if (!currentUser || !db) return;
+
+            const title = document.getElementById('art-title-input').value.trim();
+            const urlInput = document.getElementById('art-url-input').value.trim();
+            const finalImage = uploadMode === 'file' ? compressedBase64Image : urlInput;
+
+            if (!finalImage) {
+                showToast(
+                    currentLang === 'ar'
+                        ? 'يرجى اختيار صورة أو وضع رابط صحيح'
+                        : 'Please select an image or enter a valid URL'
+                );
+                return;
+            }
+
+            const submitBtn = document.getElementById('submit-art-btn');
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-60');
+
+            try {
+                const museumCol = collection(db, 'artifacts', appId, 'public', 'data', 'fan_museum');
+                await addDoc(museumCol, {
+                    title: title,
+                    imageUrl: finalImage,
+                    authorUid: currentUser.uid,
+                    authorName: currentUser.displayName || 'Member',
+                    authorPhoto: currentUser.photoURL || '',
+                    likedBy: [],
+                    createdAt: Date.now()
+                });
+
+                // Reset form & close modal
+                document.getElementById('art-form').reset();
+                compressedBase64Image = '';
+                document.getElementById('upload-preview-box').classList.add('hidden');
+                closeUploadModal();
+
+                showToast(
+                    currentLang === 'ar'
+                        ? 'تمت إضافة صورتك إلى المتحف بنجاح!'
+                        : 'Your artwork has been added to the museum!'
+                );
+            } catch (error) {
+                console.error("Error submitting artwork:", error);
+                showToast(
+                    currentLang === 'ar'
+                        ? 'حدث خطأ أثناء رفع الصورة، جرب صورة أصغر حجماً'
+                        : 'Error uploading image. Please try a smaller file.'
+                );
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-60');
+            }
+        };
+
+        // Like / Unlike Post
+        window.toggleLikePost = async function (postId) {
+            if (!currentUser) {
+                showToast(
+                    currentLang === 'ar'
+                        ? 'سجل دخولك بجوجل للإعجاب بالصور'
+                        : 'Sign in with Google to like artworks'
+                );
+                return;
+            }
+            if (!db) return;
+
+            const post = museumPosts.find((p) => p.id === postId);
+            if (!post) return;
+
+            const likedBy = Array.isArray(post.likedBy) ? [...post.likedBy] : [];
+            const idx = likedBy.indexOf(currentUser.uid);
+            if (idx > -1) {
+                likedBy.splice(idx, 1);
+            } else {
+                likedBy.push(currentUser.uid);
+            }
+
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'fan_museum', postId);
+                await updateDoc(docRef, { likedBy });
+            } catch (error) {
+                console.error("Like error:", error);
+            }
+        };
+
+        // Delete Post with Custom Confirmation Modal
+        window.requestDeletePost = function (postId) {
+            const modal = document.getElementById('confirm-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            document.getElementById('confirm-cancel-btn').onclick = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            };
+
+            document.getElementById('confirm-ok-btn').onclick = async () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                if (!db) return;
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'fan_museum', postId));
+                    if (activeLightboxPostId === postId) closeLightbox();
+                    showToast(currentLang === 'ar' ? 'تم حذف المشاركة' : 'Post deleted');
+                } catch (err) {
+                    console.error("Delete error:", err);
+                }
+            };
+        };
+
+        // Lightbox Preview
+        window.openLightbox = function (postId) {
+            const post = museumPosts.find((p) => p.id === postId);
+            if (!post) return;
+
+            activeLightboxPostId = postId;
+            document.getElementById('lightbox-img').src = post.imageUrl;
+            document.getElementById('lightbox-title').textContent = post.title;
+            document.getElementById('lightbox-author').textContent =
+                (currentLang === 'ar' ? 'بواسطة: ' : 'By: ') + (post.authorName || 'Fan');
+
+            updateLightboxStats(post);
+            document.getElementById('lightbox-like-btn').onclick = () => toggleLikePost(postId);
+
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        };
+
+        function updateLightboxStats(post) {
+            const likedBy = Array.isArray(post.likedBy) ? post.likedBy : [];
+            const isLiked = currentUser ? likedBy.includes(currentUser.uid) : false;
+            document.getElementById('lightbox-heart').textContent = isLiked ? '♥' : '♡';
+            document.getElementById('lightbox-heart').className = isLiked ? 'text-sky-400' : 'text-sky-200';
+            document.getElementById('lightbox-likes-count').textContent = likedBy.length;
+        }
+
+        window.closeLightbox = function (e) {
+            if (e && e.target !== e.currentTarget) return;
+            activeLightboxPostId = null;
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // Start Firebase
+        initFirebase();
+    </script>
+
+    <!-- UI Utilities & Bilingual Language Switcher -->
     <script>
         let currentLang = 'ar';
 
         const translations = {
             ar: {
-                langBtn: 'English',
-                heroDesc: 'مرحباً بكم في الموقع الرسمى لـ a',
-                channels: 'القنوات والمنصات',
-                contact: 'تواصل معي',
-                email: 'البريد الإلكتروني للتواصل:',
-                contactSub: 'للتواصل فقط',
-                ytSub: 'قناة المحتوى الرئيسي',
-                copy: 'نسخ',
-                copied: 'تم النسخ!',
-                dir: 'rtl'
+                dir: 'rtl',
+                langLabel: 'English',
+                signinText: 'تسجيل الدخول',
+                signoutBtn: 'خروج',
+                heroDesc: 'المساحة الرسمية لصانع المحتوى <span class="text-white font-bold">a</span> — استكشف القناة، تواصل معي، وشارك إبداعاتك في متحف المتابعين.',
+                heroYtBtn: 'زيارة القناة (3.38k)',
+                heroMuseumBtn: 'متحف صور المتابعين',
+                cardChTag: 'القنوات',
+                subsWord: 'مشترك',
+                cardContactTag: 'التواصل',
+                contactOnlyBadge: 'للتواصل فقط',
+                copyBtn: 'نسخ',
+                copiedBtn: 'تم النسخ',
+                mailBtn: 'إرسال',
+                museumTitle: 'متحف صور المتابعين',
+                museumSubtitle: 'معرض خاص يجمع رسمات وإبداعات المتابعين — سجل دخولك بحساب جوجل لإضافة صورتك!',
+                addArtBtnText: 'أضف صورتك للمتحف',
+                loadingText: 'جاري تحميل صور المتحف...',
+                emptyTitle: 'المتحف بانتظار أول مشاركة!',
+                emptyDesc: 'كن أول من يضيف رسمة أو صورة تذكارية في متحف المتابعين.',
+                modalUploadTitle: 'إضافة صورة إلى المتحف',
+                modalUploadSub: 'شارك رسمتك أو تصميمك مع مجتمع a',
+                labelArtTitle: 'عنوان الصورة / الرسمة',
+                labelArtSource: 'اختيار الصورة',
+                tabFile: 'رفع ملف',
+                tabUrl: 'رابط صورة',
+                dropzoneText: 'اضغط لاختيار صورة من جهازك',
+                dropzoneHint: 'PNG, JPG, WEBP (يتم ضغطها تلقائياً)',
+                submitBtnLabel: 'نشر في المتحف',
+                confirmTitle: 'حذف المشاركة؟',
+                confirmDesc: 'هل أنت متأكد أنك تريد حذف هذه الصورة من المتحف؟',
+                confirmCancel: 'إلغاء',
+                confirmOk: 'حذف',
+                authModalTitle: 'تسجيل الدخول / إنشاء حساب',
+                authModalSub: 'ادخل للمشاركة في متحف صور المتابعين',
+                googlePopupLabel: 'المتابعة باستخدام Google',
+                authOrText: 'أو الدخول السريع',
+                labelMemberName: 'الاسم المستعار',
+                labelMemberEmail: 'البريد الإلكتروني (اختياري)',
+                quickLoginBtn: 'دخول مباشر للمتحف',
+                footerRights: 'جميع الحقوق محفوظة لـ a 2026'
             },
             en: {
-                langBtn: 'العربية',
-                heroDesc: 'Welcome to the official website of a',
-                channels: 'CHANNELS & PLATFORMS',
-                contact: 'GET IN TOUCH',
-                email: 'Contact Email:',
-                contactSub: 'For contact only',
-                ytSub: 'Main Content Channel',
-                copy: 'COPY',
-                copied: 'COPIED!',
-                dir: 'ltr'
+                dir: 'ltr',
+                langLabel: 'العربية',
+                signinText: 'Sign in',
+                signoutBtn: 'Sign out',
+                heroDesc: 'The official space of content creator <span class="text-white font-bold">a</span> — explore the channel, get in touch, and share your creations in the fan museum.',
+                heroYtBtn: 'Visit Channel (3.38k)',
+                heroMuseumBtn: 'Fan Art Museum',
+                cardChTag: 'Channels',
+                subsWord: 'Subscribers',
+                cardContactTag: 'Contact',
+                contactOnlyBadge: 'For Contact Only',
+                copyBtn: 'Copy',
+                copiedBtn: 'Copied',
+                mailBtn: 'Email',
+                museumTitle: 'Fan Art & Community Museum',
+                museumSubtitle: 'A dedicated gallery showcasing fan art & community memories — sign in with Google to submit yours!',
+                addArtBtnText: 'Add to Museum',
+                loadingText: 'Loading museum gallery...',
+                emptyTitle: 'The museum awaits its first artwork!',
+                emptyDesc: 'Be the first to share a drawing or community photo in the museum.',
+                modalUploadTitle: 'Add Artwork to Museum',
+                modalUploadSub: 'Share your drawing or edit with the a community',
+                labelArtTitle: 'Artwork Title',
+                labelArtSource: 'Choose Image',
+                tabFile: 'Upload File',
+                tabUrl: 'Image URL',
+                dropzoneText: 'Click to choose an image from your device',
+                dropzoneHint: 'PNG, JPG, WEBP (automatically optimized)',
+                submitBtnLabel: 'Publish to Museum',
+                confirmTitle: 'Delete Post?',
+                confirmDesc: 'Are you sure you want to remove this image from the museum?',
+                confirmCancel: 'Cancel',
+                confirmOk: 'Delete',
+                authModalTitle: 'Sign In / Sign Up',
+                authModalSub: 'Join to share your art in the fan museum',
+                googlePopupLabel: 'Continue with Google',
+                authOrText: 'or Quick Member Login',
+                labelMemberName: 'Display Name',
+                labelMemberEmail: 'Email (Optional)',
+                quickLoginBtn: 'Enter Museum Now',
+                footerRights: 'All rights reserved to a 2026'
             }
         };
 
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             const t = translations[currentLang];
-            
+
             document.documentElement.dir = t.dir;
             document.documentElement.lang = currentLang;
 
-            document.getElementById('lang-btn-text').textContent = t.langBtn;
-            document.getElementById('hero-desc').textContent = t.heroDesc;
-            document.getElementById('sec-channels').textContent = t.channels;
-            document.getElementById('sec-contact').textContent = t.contact;
-            document.getElementById('label-email').textContent = t.email;
-            document.getElementById('contact-sub').textContent = t.contactSub;
-            document.getElementById('yt-sub').textContent = t.ytSub;
-            document.getElementById('btn-copy').textContent = t.copy;
+            document.getElementById('lang-label').textContent = t.langLabel;
+            document.getElementById('signin-text').textContent = t.signinText;
+            document.getElementById('signout-btn').textContent = t.signoutBtn;
+            document.getElementById('hero-desc').innerHTML = t.heroDesc;
+            document.getElementById('hero-yt-btn').textContent = t.heroYtBtn;
+            document.getElementById('hero-museum-btn').textContent = t.heroMuseumBtn;
+            document.getElementById('card-ch-tag').textContent = t.cardChTag;
+            document.getElementById('subs-word').textContent = t.subsWord;
+            document.getElementById('card-contact-tag').textContent = t.cardContactTag;
+            document.getElementById('contact-only-badge').textContent = t.contactOnlyBadge;
+            document.getElementById('copy-btn').textContent = t.copyBtn;
+            document.getElementById('mail-btn').textContent = t.mailBtn;
+            document.getElementById('museum-title').textContent = t.museumTitle;
+            document.getElementById('museum-subtitle').textContent = t.museumSubtitle;
+            document.getElementById('add-art-btn-text').textContent = t.addArtBtnText;
+            document.getElementById('loading-text').textContent = t.loadingText;
+            document.getElementById('empty-title').textContent = t.emptyTitle;
+            document.getElementById('empty-desc').textContent = t.emptyDesc;
+            document.getElementById('modal-upload-title').textContent = t.modalUploadTitle;
+            document.getElementById('modal-upload-sub').textContent = t.modalUploadSub;
+            document.getElementById('label-art-title').textContent = t.labelArtTitle;
+            document.getElementById('label-art-source').textContent = t.labelArtSource;
+            document.getElementById('tab-file').textContent = t.tabFile;
+            document.getElementById('tab-url').textContent = t.tabUrl;
+            document.getElementById('dropzone-text').textContent = t.dropzoneText;
+            document.getElementById('dropzone-hint').textContent = t.dropzoneHint;
+            document.getElementById('submit-btn-label').textContent = t.submitBtnLabel;
+            document.getElementById('confirm-title').textContent = t.confirmTitle;
+            document.getElementById('confirm-desc').textContent = t.confirmDesc;
+            document.getElementById('confirm-cancel-btn').textContent = t.confirmCancel;
+            document.getElementById('confirm-ok-btn').textContent = t.confirmOk;
+            document.getElementById('auth-modal-title').textContent = t.authModalTitle;
+            document.getElementById('auth-modal-sub').textContent = t.authModalSub;
+            document.getElementById('google-popup-label').textContent = t.googlePopupLabel;
+            document.getElementById('auth-or-text').textContent = t.authOrText;
+            document.getElementById('label-member-name').textContent = t.labelMemberName;
+            document.getElementById('label-member-email').textContent = t.labelMemberEmail;
+            document.getElementById('quick-login-btn').textContent = t.quickLoginBtn;
+            document.getElementById('footer-rights').textContent = t.footerRights;
+
+            if (typeof window.renderMuseumGrid === 'function') {
+                window.renderMuseumGrid();
+            }
         }
 
-        // Clock Update
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+        function copyEmail() {
+            const email = '9gswacontact@gmail.com';
+            const tempInput = document.createElement('input');
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+            } catch (e) {
+                if (navigator.clipboard) navigator.clipboard.writeText(email);
+            }
+            document.body.removeChild(tempInput);
 
-        // Copy Email logic
-        function copyEmail(e) {
-            const emailInput = document.getElementById('contact-email');
-            navigator.clipboard.writeText(emailInput.value);
-            const btnSpan = document.getElementById('btn-copy');
-            const originalText = translations[currentLang].copy;
-            
-            btnSpan.textContent = translations[currentLang].copied;
+            const btn = document.getElementById('copy-btn');
+            btn.textContent = translations[currentLang].copiedBtn;
+            showToast(
+                currentLang === 'ar'
+                    ? 'تم نسخ البريد الإلكتروني: 9gswacontact@gmail.com'
+                    : 'Copied email: 9gswacontact@gmail.com'
+            );
+
             setTimeout(() => {
-                btnSpan.textContent = originalText;
-            }, 1500);
+                btn.textContent = translations[currentLang].copyBtn;
+            }, 2000);
+        }
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const toast = document.getElementById('app-toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
         }
     </script>
 </body>
